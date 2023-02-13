@@ -60,6 +60,24 @@ if(!isset($_SESSION['nrp'])){
                 </div>
               </a>
             </li>
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link p-0 text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
+                <!-- <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i> -->
+                <i class="material-icons me-sm-1">person</i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton" data-bs-popper="static">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="">
+                    User Profil
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="logout.php">
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

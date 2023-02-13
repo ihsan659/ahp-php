@@ -40,7 +40,8 @@ class Pangkat {
         $result = array();
 		$sql = "SELECT 
                     id,
-                    keterangan 
+                    kepentingan,
+                    keterangan
                 FROM 
                     $this->table ";
         $query = $this->conn->query($sql);
@@ -60,7 +61,8 @@ class Pangkat {
         $data = $this->data;
 		$sql = "SELECT 
                     id,
-                    keterangan
+                    keterangan,
+                    kepentingan
                 FROM 
                     $this->table
                 WHERE id = $data->id";
@@ -80,19 +82,31 @@ class Pangkat {
     
     private function saveData(){
         $data = $this->data;
-        $sql = "INSERT INTO $this->table (
-                                    keterangan
-                                )
-                                VALUES(
-                                    '$data->description'
-                                )";
-        $query = $this->conn->query($sql);
-        if ($query) {
-            $this->getData();
+        $check = $this->checkIntesitas();
+        if($check < 1){
+            $sql = "INSERT INTO $this->table (
+                                        keterangan,
+                                        kepentingan
+                                    )
+                                    VALUES(
+                                        '$data->description',
+                                        '$data->kepentingan'
+                                    )";
+            $query = $this->conn->query($sql);
+            if ($query) {
+                $this->getData();
+            }else{
+                $send = array(
+                    'code' => 201,
+                    'message' => 'Data Tidak dapat disimpan',
+                    'result' => $data,
+                );
+                echo json_encode($send);
+            }
         }else{
             $send = array(
                 'code' => 201,
-                'message' => 'Data Tidak dapat disimpan',
+                'message' => 'Intesitas Kepentingan Telah digunakan',
                 'result' => $data,
             );
             echo json_encode($send);
@@ -104,7 +118,8 @@ class Pangkat {
         $sql = "UPDATE 
                     $this->table
                 SET
-                    keterangan = '$data->description'
+                    keterangan = '$data->description',
+                    kepentingan = '$data->kepentingan'
                 WHERE 
                     id = $data->id ";
         $query = $this->conn->query($sql);
@@ -127,6 +142,21 @@ class Pangkat {
             );
             echo json_encode($send);
         }
+    }
+
+    private function checkIntesitas() {
+        $data = $this->data;
+        $result = null;
+        $sql = "SELECT 
+                    id,
+                    keterangan,
+                    kepentingan
+                FROM 
+                    $this->table
+                WHERE kepentingan = $data->kepentingan";
+        $query = $this->conn->query($sql);
+        $row = mysqli_num_rows($query);
+        return $row;
     }
 
     

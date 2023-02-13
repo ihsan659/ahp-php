@@ -18,6 +18,9 @@ class Kriteria {
             case 'data':
                 $this->getData();
                 break;
+            case 'getcode':
+                $this->getNewID();
+                break;
             case 'save':
                 $this->saveData();
                 break;
@@ -39,9 +42,9 @@ class Kriteria {
     private function getData(){
         $result = array();
 		$sql = "SELECT 
-                    id,
-                    keterangan, 
-                    point
+                    code,
+                    keterangan,
+                    bobot
                 FROM 
                     $this->table ";
         $query = $this->conn->query($sql);
@@ -59,12 +62,12 @@ class Kriteria {
     private function editData(){
         $data = $this->data;
 		$sql = "SELECT 
-                    id,
+                    code,
                     keterangan,
-                    point
+                    bobot
                 FROM 
                     $this->table
-                WHERE id = $data->id";
+                WHERE code = '$data->id'";
         $query = $this->conn->query($sql);
         while ($row =  mysqli_fetch_assoc($query)) {
             $result[] = $row;
@@ -82,12 +85,14 @@ class Kriteria {
     private function saveData(){
         $data = $this->data;
         $sql = "INSERT INTO $this->table (
-                                    keterangan, 
-                                    point
+                                    code,
+                                    keterangan,
+                                    bobot
                                 )
                                 VALUES(
+                                    '$data->code',
                                     '$data->description',
-                                    '$data->point'
+                                    '$data->bobot'
                                 )";
         $query = $this->conn->query($sql);
         if ($query) {
@@ -108,18 +113,41 @@ class Kriteria {
                     $this->table
                 SET
                     keterangan = '$data->description',
-                    point = '$data->point'
+                    bobot = '$data->bobot'
                 WHERE 
-                    id = $data->id ";
+                    code = '$data->id' ";
         $query = $this->conn->query($sql);
         if ($query) {
             $this->getData();
         }
     }
+    private function getNewID() {
+        $sql = "SELECT 
+                    keterangan,
+                    code,
+                    bobot
+                FROM $this->table
+                ORDER BY code DESC LIMIT 1";
+        $query = $this->conn->query($sql);
+        $row = mysqli_fetch_assoc($query);
+        if($row != null) {
+            $code = explode("C", $row['code']);
+            $result = "C".($code[1]+1);
+        }else {
+            $result = "C1";
+        }
+        $send = array(
+            'code' => 200,
+            'message' => 'success',
+            'result' => $result,
+        );
+
+        echo json_encode($send);
+    }
 
     private function deleteData() {
         $data = $this->data;
-        $sql = "DELETE FROM $this->table where id = $data->id";
+        $sql = "DELETE FROM $this->table where code = '$data->id'";
         $query = $this->conn->query($sql);
         if ($query) {
             $this->getData();

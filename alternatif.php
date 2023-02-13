@@ -24,6 +24,7 @@ include "./includes/header.php";
                 <table id="tableAlternatif" class="table align-items-center">
                   <thead>
                     <tr>
+                        <th width="5%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kepentingan</th>
                         <th width="70%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Keterangan</th>
                         <th width="10%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Aksi</th>
                     </tr>

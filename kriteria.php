@@ -24,8 +24,9 @@ include "./includes/header.php";
                 <table id="tableKriteria" class="table align-items-center">
                   <thead>
                     <tr>
-                        <th width="20%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Name</th>
-                        <th width="70%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Keterangan</th>
+                        <th width="20%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Code</th>
+                        <th width="50%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Name</th>
+                        <th width="20%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Bobot</th>
                         <th width="10%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
                   </thead>

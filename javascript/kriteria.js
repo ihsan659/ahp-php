@@ -1,5 +1,6 @@
 varId.url = '/ajax/kriteria.php';
-varId.Point = document.getElementById('Point');
+varId.Code = document.getElementById('Code');
+varId.Bobot = document.getElementById('Bobot');
 varId.Description = document.getElementById('Description');
 
 varId.table = document.getElementById('tableKriteria');
@@ -8,7 +9,8 @@ varId.dataTable = $('#tableKriteria');
 var data = {
     id: '',
     description : '',
-    point : '',
+    code : '',
+    bobot : '',
     dataType : 'data',
     method: 'method'
 };
@@ -23,10 +25,12 @@ const varButton = {
 function resetData() {
     data.id = '';
     data.description = '';
-    data.point = '';
     data.dataType = 'data';
+    data.code = '';
+    data.bobot = '';
     varId.Description.value = '';
-    varId.Point.value = '';
+    varId.Bobot.value = '';
+    varId.Code.value = '';
 }
 
 varButton.cancel.onclick = function () {
@@ -36,12 +40,23 @@ varButton.cancel.onclick = function () {
 varButton.save.onclick = function () {
     saveData();
 }
+varButton.new.onclick = function () {
+    request('getcode', JSON.stringify(data), varId.url).then( async (result) => {
+        if (JSON.parse(result).code == 200){
+            varId.Code.value = JSON.parse(result).result;
+            varId.Code.disabled = true;
+        }else{
+            return false
+        }
+    });
+}
 
 function saveData() {
     method = data.method == 'data' ? 'save' : 'save' + data.method;
     if(varId.Description.value != ''){
         data.description = varId.Description.value;
-        data.point = varId.Point.value;
+        data.bobot = varId.Bobot.value;
+        data.code = varId.Code.value;
         result = request(method, JSON.stringify(data), varId.url).then( async (result) => {
             if (JSON.parse(result).code == 200){
                 resetData();
@@ -70,12 +85,14 @@ function getData(method, _data){
 }
 function getEdit(method, _data){
     if(method == 'edit'){
+        varId.Description.focus();
         var __data = _data.result[0];
-        data.id = __data.id;
-        varId.Point.value = __data.point;
+        data.id = __data.code;
+        varId.Code.disabled = true;
+        varId.Code.value = __data.code;
+        varId.Bobot.value = __data.bobot;
         varId.Description.value = __data.keterangan;
-        varId.Point.parentNode.classList.add('is-filled')
-        varId.Description.parentNode.classList.add('is-filled')
+        varId.Bobot.value = __data.bobot;
     }
 }
 
@@ -86,18 +103,16 @@ function viewTable(datatable, data, length = 0, table, type, url){
         for (var i = 0; i < length; i++){
             var tr = document.createElement('tr');
             Object.keys(data[i]).forEach(function (key){
-                if(key != 'id'){
-                    var td = document.createElement('td');
-                    td.innerHTML = data[i][key];
-                    tr.appendChild(td);
-                }
+                var td = document.createElement('td');
+                td.innerHTML = data[i][key];
+                tr.appendChild(td);
             })
             var tdd = document.createElement('td');  
             var aa = document.createElement('a');
             var ii = document.createElement('i');   
             ii.setAttribute('class', 'material-icons text-success text-sm m-2');
             aa.setAttribute('class', 'align-middle');
-            aa.setAttribute('data-id', data[i].id);
+            aa.setAttribute('data-id', data[i].code);
             ii.setAttribute('data-method', 'edit');
             aa.setAttribute('data-bs-toggle', 'modal');
             aa.setAttribute('data-bs-target', `#${varId.modal.id}`);
@@ -111,7 +126,7 @@ function viewTable(datatable, data, length = 0, table, type, url){
             var iii = document.createElement('i');   
             iii.setAttribute('class', 'material-icons text-danger text-sm m-2');
             aaa.setAttribute('class', 'align-middle');
-            aaa.setAttribute('data-id', data[i].id);
+            aaa.setAttribute('data-id', data[i].code);
             iii.setAttribute('data-method', 'delete');
             aaa.setAttribute('onclick', '_delete("' + varId.url + '");');
             iii.innerHTML = 'delete'; 
