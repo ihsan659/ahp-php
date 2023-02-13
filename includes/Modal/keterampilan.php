@@ -1,8 +1,8 @@
-<div class="modal fade" id="ModalKetampilan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalKetampilanLabel" aria-hidden="true">
+<div class="modal fade" id="ModalKeterampilan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ModalKeterampilanLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="ModalKetampilanLabel">Data Ketampilan</h5>
+            <h5 class="modal-title" id="ModalKeterampilanLabel">Data Keterampilan</h5>
         </div>
         <div class="modal-body">
             <div class="row">
