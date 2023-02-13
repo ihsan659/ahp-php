@@ -10,6 +10,9 @@ function stopLoader(){
     varId.loader.classList.remove('pageloader');
     varId.loader.style.display = "none";
 }
+setTimeout(() => {
+    stopLoader();
+}, 2000);
 async function request(method, data, url){
     if (method != "edit") {
         method = method.replace(/[0-9]/g, '');
@@ -33,12 +36,16 @@ async function request(method, data, url){
                         getEdit(method, result);
                     }else if(method == 'delate'){
                         getDelate(method, result);
+                    }else if(method == 'getcode'){
+                        
                     }else{
                         getData(method, result);
                     }
-                }else if (result.code == 500 || result.code == 504 || result.code == 403){
+                }else if (result.code == 500 || result.code == 504 || result.code == 403 || result.code == 201){
                     stopLoader()
-                    console.log('Error');
+                    if (method == 'save' || method == 'saveedit' || method == 'delete') {
+                        errorServer(result)
+                    }
                 }
             }catch(e){
                 console.log(e);
@@ -54,6 +61,9 @@ function _edit(url) {
     request(data.method, JSON.stringify(data), url);
 }
 
+function errorServer(result){
+    alert(result.message, 'Please try again', 'error');
+}
 
 function _delete(url){
     resetData();

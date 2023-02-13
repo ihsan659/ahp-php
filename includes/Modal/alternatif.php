@@ -11,6 +11,10 @@
                         <label class="form-label">Description</label>
                         <input type="text" id="Description" class="form-control" required/>
                     </div>
+                    <div class="input-group input-group-outline my-3">
+                        <label class="form-label">Intesitas Kepentingan</label>
+                        <input type="number" id="Kepentingan" class="form-control" required/>
+                    </div>
                 </div>
             </div>
         </div>

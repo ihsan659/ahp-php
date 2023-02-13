@@ -6,18 +6,22 @@
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Description</label>
-                        <input type="text" id="Description" class="form-control" required/>
+            <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Code</label>
+                        <input class="form-control" id="Code" type="text">
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Point</label>
-                        <input type="text" id="Point" class="form-control" required/>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Description</label>
+                        <input class="form-control" id="Description" type="text">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Bobot</label>
+                        <input class="form-control" id="Bobot" type="text">
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+<!-- <div class="min-height-300 bg-gradient-info position-absolute w-100"></div> -->
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps bg-white" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -20,6 +21,18 @@
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Modul</h6>
         </li>
+        <li class="nav-item" id="NavPerbandingan">
+          <a class="nav-link text-dark <?= $Title == 'Perbandingan' ? 'active bg-gradient-info' : '' ?>" href="./Perbandingan.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">key</i>
+            </div>
+            <span class="nav-link-text ms-1">Perbandingan</span>
+          </a>
+        </li>
+        
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Tools</h6>
+        </li>
         <li class="nav-item" id="NavKriteria">
           <a class="nav-link text-dark <?= $Title == 'Kriteria' ? 'active bg-gradient-info' : '' ?>" href="./kriteria.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -35,9 +48,6 @@
             </div>
             <span class="nav-link-text ms-1">Alternatif</span>
           </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Tools</h6>
         </li>
         <li class="nav-item" id="NavKetampilan">
           <a class="nav-link text-dark <?= $Title == 'Ketampilan' ? 'active bg-gradient-info' : '' ?>" href="./ketampilan.php">
@@ -71,9 +81,6 @@
             <span class="nav-link-text ms-1">Anggota</span>
           </a>
         </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Report</h6>
-        </li>
         <!-- <li class="nav-item" id="NavAnggota">
           <a class="nav-link text-dark <?= $Title == 'Anggota' ? 'active bg-gradient-info' : '' ?>" href="./anggota.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -84,7 +91,7 @@
         </li> -->
       </ul>
     </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+    <!-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
         <a class="btn bg-gradient-info mt-4 w-100" href="logout.php" type="button">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
@@ -93,5 +100,5 @@
             </div>
         </a>
       </div>
-    </div>
+    </div> -->
   </aside>
