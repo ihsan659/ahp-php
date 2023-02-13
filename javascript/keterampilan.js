@@ -1,9 +1,9 @@
-varId.url = '/ajax/ketampilan.php';
+varId.url = '/ajax/keterampilan.php';
 varId.Description = document.getElementById('Description');
 
-varId.table = document.getElementById('tableKetampilan');
-varId.modal = document.getElementById('ModalKetampilan');
-varId.dataTable = $('#tableKetampilan');
+varId.table = document.getElementById('tableKeterampilan');
+varId.modal = document.getElementById('ModalKeterampilan');
+varId.dataTable = $('#tableKeterampilan');
 var data = {
     id: '',
     description : '',
@@ -61,7 +61,7 @@ function getData(method, _data){
         modal.attr("style", "display:none;");
         backdrop.remove();
     }
-    refresh(_data, varId.table, varId.dataTable, 'ketampilan', varId.url);
+    refresh(_data, varId.table, varId.dataTable, 'Keterampilan', varId.url);
 }
 function getEdit(method, _data){
     if(method == 'edit'){

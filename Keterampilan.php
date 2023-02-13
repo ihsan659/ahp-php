@@ -1,5 +1,5 @@
 <?php 
-$Title = "Ketampilan";
+$Title = "Keterampilan";
 include "./includes/header.php";
 ?>
 
@@ -13,7 +13,7 @@ include "./includes/header.php";
                         <h6 class="mb-0">Table <?= $Title ?></h6>
                     </div>
                     <div class="col-6 text-end">
-                      <button type="button" id="btnNew" class="btn bg-gradient-info mb-0" data-bs-toggle="modal" data-bs-target="#ModalKetampilan">
+                      <button type="button" id="btnNew" class="btn bg-gradient-info mb-0" data-bs-toggle="modal" data-bs-target="#ModalKeterampilan">
                         <i class="material-icons text-sm">add</i>&nbsp;&nbsp;New
                       </button>
                     </div>
@@ -21,7 +21,7 @@ include "./includes/header.php";
             </div>
             <div class="card-body">
               <div class="table-responsive text-sm">
-                <table id="tableKetampilan" class="table align-items-center">
+                <table id="tableKeterampilan" class="table align-items-center">
                   <thead>
                     <tr>
                         <th width="70%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Keterangan</th>
@@ -38,8 +38,8 @@ include "./includes/header.php";
 
 
 <?php 
-    include "./includes/modal/ketampilan.php";
+    include "./includes/modal/keterampilan.php";
     include "./includes/footer.php"
 ?>
 
-<script type="text/javascript" src="javascript/ketampilan.js?v=<?= date('YmdHis') ?>"></script>
+<script type="text/javascript" src="javascript/keterampilan.js?v=<?= date('YmdHis') ?>"></script>

@@ -10,9 +10,9 @@ class Pangkat {
         $db = new koneksi();
         $this->conn = $db->getConnection();
         $this->data = $data;
-        $this->table = "ketampilan";
+        $this->table = "keterampilan";
         switch ($reason) {
-            case 'ketampilan':
+            case 'keterampilan':
                 $this->getData();
                 break;
             case 'data':

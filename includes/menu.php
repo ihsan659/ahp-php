@@ -49,12 +49,12 @@
             <span class="nav-link-text ms-1">Alternatif</span>
           </a>
         </li>
-        <li class="nav-item" id="NavKetampilan">
-          <a class="nav-link text-dark <?= $Title == 'Ketampilan' ? 'active bg-gradient-info' : '' ?>" href="./ketampilan.php">
+        <li class="nav-item" id="NavKeterampilan">
+          <a class="nav-link text-dark <?= $Title == 'Keterampilan' ? 'active bg-gradient-info' : '' ?>" href="./Keterampilan.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">lan</i>
             </div>
-            <span class="nav-link-text ms-1">Ketampilan</span>
+            <span class="nav-link-text ms-1">Keterampilan</span>
           </a>
         </li>
         <li class="nav-item" id="NavPangkat">
