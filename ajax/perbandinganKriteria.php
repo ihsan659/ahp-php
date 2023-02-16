@@ -14,6 +14,9 @@ class Perbandingan {
             case 'data':
                 $this->getData();
                 break;
+            case 'reset':
+                $this->resetData();
+                break;
             default:
                 break;
         }
@@ -21,61 +24,54 @@ class Perbandingan {
     }
 
     private function getData(){
-        $result = $this->hitungKretieria();
+        $sql = "SELECT 
+                    pertama,
+                    nilai,
+                    hasil,
+                    kedua
+                FROM analisa_kriteria";
+        $query = $this->conn->query($sql);
+        if(!$query){          
+            while($row =  mysqli_fetch_assoc($query)){
+                $hasil[] = $row;
+            }
+    
+            $kriteri = $this->getKriteria();
+            $length = count($kriteri);
+            $index = 0;
+            for($i = 0; $i < $length; $i++){
+                for($j = 0; $j < $length; $j++){
+                    $result[$i][] = $hasil[$index]['hasil'];
+                    $index++;
+                }
+            }
+        }else{
+            $result = [];
+        }
+
         $send = array(
             'code' => 200,
             'message' => 'success',
-            'result' => $result
+            'result' => $result,
         );
         echo json_encode($send);
 	}
 
-    private function hitungKretieria(){
-        // $alternatif = $this->getAlternatif();
-        $kriteria = $this->getKriteria();
-        $index = count($kriteria);
-        $maxBobot = max(array_column($kriteria, 'bobot'));
-        $minBobot = min(array_column($kriteria, 'bobot'));
-        $Interest = ($maxBobot- $minBobot) / $index;
-        for ($i = 0; $i < $index; $i++) {
-            for($j= 0; $j < $index; $j++){
-                if($kriteria[$i]['bobot'] <= $kriteria[$j]['bobot'] ){
-                    $range = $kriteria[$j]['bobot'] - $kriteria[$i]['bobot'];
-                } else{
-                    $range =  $kriteria[$i]['bobot']-$kriteria[$j]['bobot'];
-                }
-
-                if($range == 0){
-                    $row = 1;
-                } else if($range <= ($Interest*2)){
-                    $row = 2;
-                } else if($range <= ($Interest*3)){
-                    $row = 3;
-                } else if($range <= ($Interest*4)){
-                    $row = 4;
-                } else if($range <= ($Interest*5)){
-                    $row = 5;
-                } else if($range <= ($Interest*6)){
-                    $row = 6;
-                } else if($range <= ($Interest*7)){
-                    $row = 7;
-                } else if($range <= ($Interest*8)){
-                    $row = 8;
-                } else {
-                    $row = 9;
-                }
-
-                if($kriteria[$i]['bobot'] == $kriteria[$j]['bobot']) {
-                    $matrix[$i][$j] = 1;
-                }else if($kriteria[$i]['bobot'] < $kriteria[$j]['bobot']){
-                    $matrix[$i][$j] = 1/$row;
-                }else if($kriteria[$i]['bobot'] > $kriteria[$j]['bobot']){
-                    $matrix[$i][$j] = $row;
-                }
-            }
+    private function resetData(){
+        $sql = "DELETE FROM analisa_kriteria";
+        $query = $this->conn->query($sql);
+        if ($query) {
+            $send = array(
+                'code' => 200,
+                'message' => 'Success'
+            );
+        }else{
+            $send = array(
+                'code' => 201,
+                'message' => 'Data Tidak dapat disimpan'
+            );
         }
-        // var_dump(array_sum($matrix));
-        return $matrix;
+        echo json_encode($send);
     }
 
     private function getAlternatif (){

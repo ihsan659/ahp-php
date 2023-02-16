@@ -12,6 +12,11 @@
                     <div class="col-6 d-flex align-items-center">
                         <h6 class="mb-0"><?= $Title ?> Kriteria</h6>
                     </div>
+                    <div class="col-6 text-end">
+                      <button type="button" id="resetData" class="btn btn-sm bg-gradient-danger mb-0">
+                        <i class="material-icons text-md">autorenew</i>&nbsp;&nbsp; Reset Kriteria
+                      </button>
+                    </div>
                 </div>
             </div>
             <div class="card-body">

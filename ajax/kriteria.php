@@ -27,6 +27,9 @@ class Kriteria {
             case 'saveedit':
                 $this->saveEdit();
                 break;
+            case 'genareate':
+                $this->genareateCriteria();
+                break;
             case 'edit':
                 $this->editData();
                 break;
@@ -51,10 +54,12 @@ class Kriteria {
         while ($row =  mysqli_fetch_assoc($query)){
             $result[] = $row;
         }
+        $jumlah = $this->checkCriteriaNilai();
         $send = array(
             'code' => 200,
             'message' => 'success',
-            'result' => $result
+            'result' => $result,
+            'jumlah' => $jumlah
         );
         echo json_encode($send);
 	}
@@ -161,6 +166,123 @@ class Kriteria {
         }
     }
 
+    private function checkCriteriaNilai(){
+        $sql = "SELECT nilai FROM analisa_kriteria ";
+        $query = $this->conn->query($sql);
+        $row = mysqli_num_rows($query);
+        return $row;
+    }
+
+    private function genareateCriteria(){
+        $kriteria = $this->getKriteria();
+        $index = count($kriteria);
+        $maxBobot = max(array_column($kriteria, 'bobot'));
+        $minBobot = min(array_column($kriteria, 'bobot'));
+        $Interest = ($maxBobot- $minBobot) / $index;
+        for ($i = 0; $i < $index; $i++){
+            for($j= 0; $j < $index; $j++){
+
+                if($kriteria[$i]['bobot'] <= $kriteria[$j]['bobot'] ){
+                    $range = $kriteria[$j]['bobot'] - $kriteria[$i]['bobot'];
+                } else{
+                    $range =  $kriteria[$i]['bobot']-$kriteria[$j]['bobot'];
+                }
+                $row = $this->setAlternatif($range, $Interest);
+
+                $nilai[$i][$j] = $row;
+
+                if($kriteria[$i]['bobot'] == $kriteria[$j]['bobot']) {
+                    $matrix[$i][$j] = 1;
+                }else if($kriteria[$i]['bobot'] < $kriteria[$j]['bobot']){
+                    $matrix[$i][$j] = 1/$row;
+                }else if($kriteria[$i]['bobot'] > $kriteria[$j]['bobot']){
+                    $matrix[$i][$j] = $row;
+                }
+
+            }
+        }
+        $check = $this->saveCriteria($matrix, $kriteria, $nilai);
+        if($check){
+            $send = array(
+                'code' => 200,
+                'message' => 'success'
+            );
+            echo json_encode($send);
+        }
+    }
+
+    private function saveCriteria ($matrix, $kriteria, $nilai){
+        foreach ($matrix as $key => $value) {
+            foreach ($value as $index => $values){
+                $sql = "INSERT INTO analisa_kriteria (
+                    pertama,
+                    nilai,
+                    hasil,
+                    kedua
+                )
+                VALUES(
+                    '".$kriteria[$key]['code']."',
+                    '".$nilai[$key][$index]."',
+                    '".$values."',
+                    '".$kriteria[$index]['code']."'
+                )";
+
+                $query = $this->conn->query($sql);
+            }
+        }
+        return $query;
+    }
+
+    private function getKriteria (){
+        $result = array();
+		$sql = "SELECT 
+                    code,
+                    bobot
+                FROM kriteria ";
+        $query = $this->conn->query($sql);
+        while ($row =  mysqli_fetch_assoc($query)){
+            $result[] = $row;
+        }
+
+        return $result;
+    }
+
+    private function getAlternatif (){
+        $result = array();
+		$sql = "SELECT 
+                    kepentingan,
+                    keterangan
+                FROM alternatif ORDER BY kepentingan ASC";
+        $query = $this->conn->query($sql);
+        while ($row =  mysqli_fetch_assoc($query)){
+            $result[] = $row;
+        }
+
+        return $result;
+    }
+
+    private function setAlternatif($range, $Interest){
+        if($range == 0){
+            $row = 1;
+        } else if($range <= ($Interest*2)){
+            $row = 2;
+        } else if($range <= ($Interest*3)){
+            $row = 3;
+        } else if($range <= ($Interest*4)){
+            $row = 4;
+        } else if($range <= ($Interest*5)){
+            $row = 5;
+        } else if($range <= ($Interest*6)){
+            $row = 6;
+        } else if($range <= ($Interest*7)){
+            $row = 7;
+        } else if($range <= ($Interest*8)){
+            $row = 8;
+        } else {
+            $row = 9;
+        }
+        return $row;
+    }
     
 } 
 

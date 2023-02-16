@@ -20,6 +20,7 @@ const varButton = {
     delete : document.getElementById('btnHapus'),
     cancel : document.getElementById('btnCancel'),
     save : document.getElementById('btnSave'),
+    generate : document.getElementById('generateCR')
 }
 
 function resetData() {
@@ -51,6 +52,30 @@ varButton.new.onclick = function () {
     });
 }
 
+varButton.generate.onclick = function() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Sure for Generate this data?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Generate!'
+    }).then((result) => {
+        if (result.value) {
+            startLoader();
+            request('genareate', JSON.stringify(data), varId.url).then( async (result) => {
+                if (JSON.parse(result).code == 200){
+                    varButton.generate.style.display = 'none';
+                    window.open("Perbandingan.php");
+                }else{
+                    return false
+                }
+            });
+        }
+    })
+}
+
 function saveData() {
     method = data.method == 'data' ? 'save' : 'save' + data.method;
     if(varId.Description.value != ''){
@@ -73,6 +98,9 @@ function saveData() {
 
 getViewData(data.dataType, varId.url);
 function getData(method, _data){
+    if(_data.jumlah > 0){
+        varButton.generate.style.display = 'none';
+    }
     var modal = $(`#${varId.modal.id}`);
     var backdrop = $('.modal-backdrop');
     if(method == 'save' || method == 'saveedit'){

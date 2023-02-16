@@ -13,6 +13,9 @@ include "./includes/header.php";
                         <h6 class="mb-0">Table <?= $Title ?></h6>
                     </div>
                     <div class="col-6 text-end">
+                      <button type="button" id="generateCR" class="btn bg-gradient-success mb-0">
+                        <i class="material-icons text-sm">sync_alt</i>&nbsp;&nbsp;Generate Kriteria
+                      </button>
                       <button type="button" id="btnNew" class="btn bg-gradient-info mb-0" data-bs-toggle="modal" data-bs-target="#ModalKriteria">
                         <i class="material-icons text-sm">add</i>&nbsp;&nbsp;New
                       </button>
