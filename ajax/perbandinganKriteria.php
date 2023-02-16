@@ -31,7 +31,7 @@ class Perbandingan {
                     kedua
                 FROM analisa_kriteria";
         $query = $this->conn->query($sql);
-        if(!$query){          
+        if($query){          
             while($row =  mysqli_fetch_assoc($query)){
                 $hasil[] = $row;
             }
