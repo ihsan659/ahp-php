@@ -89,6 +89,28 @@ function _delete(url){
     })
 }
 
+function alertDataNone(message, type, target = false) {
+    Swal.fire({
+        // title: 'Are you sure?',
+        text: message,
+        icon: type,
+        showCancelButton: false,
+        confirmButtonColor: '#3085d6',
+    }).then((result) => {
+        if (result.value) {
+            console.log(result);
+            location.replace(target);
+        //     startLoader();
+        //     Swal.fire(
+        //         'Deleted!',
+        //         'Your file has been deleted.',
+        //         'success'
+        //     )
+        //     request('delete', JSON.stringify(data), url);
+        }
+    })
+}
+
 function id(event) {
     var data = {
         id: event.target.parentNode.dataset.id,
@@ -147,5 +169,11 @@ function getSelected(name, select, value, selected = null){
     });
     select.innerHTML = options; 
 }
+function nilaiIndeksRandom(nilai) {
+    nilai >= 15 ? 15 : nilai;
+    var indeksRandom = [0,0,0.58,0.90,1.12,1.24,1.32,1.41,1.45,1.49,1.51,1.48,1.56,1.57,1.59];
+    return indeksRandom[nilai-1];
+}
 
 $('body').toggleClass('loaded');
+
