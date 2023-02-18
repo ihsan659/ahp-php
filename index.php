@@ -8,7 +8,7 @@ include "./includes/header.php";
         <div class="col-12">
           <div class="card p-3">
             <div class="card-body">
-              <h3 class="text-center">Selamat Datang</h3>
+              <h3 class="text-center">Welcome</h3>
           </div>
         </div>
     </div>
