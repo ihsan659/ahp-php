@@ -20,24 +20,49 @@
                 </div>
             </div>
             <div class="card-body">
-            <div class="table-responsive">
-                <table id="tablePerbandinganKriteria" class="table table-bordered table-striped text-center text-xs">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>C1</th>
-                            <th>C2</th>
-                            <th>C3</th>
-                            <th>C4</th>
-                            <th>C5</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                    </tfoot>
+                <div class="table-responsive">
+                    <table id="tablePerbandinganKriteria" class="table table-bordered table-striped text-center text-xs">
+                        <thead>
+                            <!-- <tr>
+                                <th></th>
+                                <th>C1</th>
+                                <th>C2</th>
+                                <th>C3</th>
+                                <th>C4</th>
+                                <th>C5</th>
+                            </tr> -->
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table id="tableNilaiEigen" class="table table-bordered table-striped text-center text-xs">
+                        <thead>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <table class="table table-bordered table-striped text-xs w-20">
+                    <tr>
+                        <td>Lamda Max</td>
+                        <td><label id="lamdaMax"> </label></td>
+                    </tr>
+                    <tr>
+                        <td>CI</td>
+                        <td><label id="nilaiCI"> </label></td>
+                    </tr>
+                    <tr>
+                        <td>CR</td>
+                        <td><label id="nilaiCR"> </label></td>
+                    </tr>
                 </table>
-              </div>
+                
+                <!-- <h6 class="mb-0"> </h6>
+                <h6 class="mb-">Perbandingan Kriteria</h6>
+                <p></p> -->
             </div>
           </div>
         </div>
