@@ -3,8 +3,8 @@ session_start();
 class Koneksi{
 	private $server = "localhost";
 	private $username = "root";
-	private $pass = "M1r34cl3";
-	private $db = "polda_makassar";
+	private $pass = "pass";
+	private $db = "dbname";
 	private $conn = null;
 
 	public function __construct(){
