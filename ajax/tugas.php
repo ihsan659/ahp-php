@@ -56,7 +56,7 @@ class Tugas {
                     FROM $this->table
                     inner join anggota on anggota.nrp = tugas.nrp
                     inner join kriteria on kriteria.code = tugas.criteria
-                    inner join keterampilan on keterampilan.id = tugas.keterampilan ";
+                    left join keterampilan on keterampilan.id = tugas.keterampilan ";
         $query = $this->conn->query($sql);
         while ($row =  mysqli_fetch_assoc($query)) {
             $result[] = $row;
