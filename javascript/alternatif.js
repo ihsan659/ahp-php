@@ -20,6 +20,10 @@ const varButton = {
     save : document.getElementById('btnSave'),
 }
 
+if(session.role == 0){
+    varButton.new.setAttribute('style', 'display: none;');
+}
+
 function resetData() {
     data.id = '';
     data.description = '';
@@ -101,30 +105,32 @@ function viewTable(datatable, data, length = 0, table, type, url){
                 }
             })
             var tdd = document.createElement('td');  
-            var aa = document.createElement('a');
-            var ii = document.createElement('i');   
-            ii.setAttribute('class', 'material-icons text-success text-sm m-2');
-            aa.setAttribute('class', 'align-middle');
-            aa.setAttribute('data-id', data[i].id);
-            ii.setAttribute('data-method', 'edit');
-            aa.setAttribute('data-bs-toggle', 'modal');
-            aa.setAttribute('data-bs-target', `#${varId.modal.id}`);
-            aa.setAttribute('onclick', '_edit("' + varId.url + '")');
-            ii.innerHTML = 'edit'; 
-            aa.appendChild(ii);
-            tdd.appendChild(aa);
-
-
-            var aaa = document.createElement('a');
-            var iii = document.createElement('i');   
-            iii.setAttribute('class', 'material-icons text-danger text-sm m-2');
-            aaa.setAttribute('class', 'align-middle');
-            aaa.setAttribute('data-id', data[i].id);
-            iii.setAttribute('data-method', 'delete');
-            aaa.setAttribute('onclick', '_delete("' + varId.url + '");');
-            iii.innerHTML = 'delete'; 
-            aaa.appendChild(iii);
-            tdd.appendChild(aaa);
+            if(session.role > 0){
+                var aa = document.createElement('a');
+                var ii = document.createElement('i');   
+                ii.setAttribute('class', 'material-icons text-success text-sm m-2');
+                aa.setAttribute('class', 'align-middle');
+                aa.setAttribute('data-id', data[i].id);
+                ii.setAttribute('data-method', 'edit');
+                aa.setAttribute('data-bs-toggle', 'modal');
+                aa.setAttribute('data-bs-target', `#${varId.modal.id}`);
+                aa.setAttribute('onclick', '_edit("' + varId.url + '")');
+                ii.innerHTML = 'edit'; 
+                aa.appendChild(ii);
+                tdd.appendChild(aa);
+    
+    
+                var aaa = document.createElement('a');
+                var iii = document.createElement('i');   
+                iii.setAttribute('class', 'material-icons text-danger text-sm m-2');
+                aaa.setAttribute('class', 'align-middle');
+                aaa.setAttribute('data-id', data[i].id);
+                iii.setAttribute('data-method', 'delete');
+                aaa.setAttribute('onclick', '_delete("' + varId.url + '");');
+                iii.innerHTML = 'delete'; 
+                aaa.appendChild(iii);
+                tdd.appendChild(aaa);
+            }
             tr.appendChild(tdd);
             html.appendChild(tr);
         }

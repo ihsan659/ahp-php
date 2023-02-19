@@ -29,6 +29,14 @@
             <span class="nav-link-text ms-1">Perbandingan</span>
           </a>
         </li>
+        <li class="nav-item" id="NavTugas">
+          <a class="nav-link text-dark <?= $Title == 'Tugas' ? 'active bg-gradient-info' : '' ?>" href="./Tugas.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">integration_instructions</i>
+            </div>
+            <span class="nav-link-text ms-1">Tugas</span>
+          </a>
+        </li>
         
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Tools</h6>
@@ -81,24 +89,6 @@
             <span class="nav-link-text ms-1">Anggota</span>
           </a>
         </li>
-        <!-- <li class="nav-item" id="NavAnggota">
-          <a class="nav-link text-dark <?= $Title == 'Anggota' ? 'active bg-gradient-info' : '' ?>" href="./anggota.php">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">Anggota</span>
-          </a>
-        </li> -->
       </ul>
     </div>
-    <!-- <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn bg-gradient-info mt-4 w-100" href="logout.php" type="button">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
-              <span class="nav-link-text ms-1">logout</span>
-            </div>
-        </a>
-      </div>
-    </div> -->
   </aside>

@@ -1,6 +1,12 @@
 var varId={};
 var base_url = window.location.origin;
 varId.loader = document.getElementById('titleLoader');
+console.log(session);
+if(session.role == 0){
+    document.getElementById('NavPangkat').style.display = 'none';
+    document.getElementById('NavJabatan').style.display = 'none';
+    document.getElementById('NavAnggota').style.display = 'none';
+}
 
 function startLoader() {
     varId.loader.classList.add('pageloader');
@@ -13,6 +19,50 @@ function stopLoader(){
 setTimeout(() => {
     stopLoader();
 }, 2000);
+
+function getDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+
+    today = dd + '/' + mm + '/' + yyyy
+    document.getElementById("Date").value = today;
+}
+
+function selectOption(section, elemet){
+    elemet.forEach( function (value){
+        var option = document.createElement("option");
+        option.value = value.code;
+        option.innerHTML = value.name;
+        section.appendChild(option);
+    });
+    return section;
+}
+
+function getDataKriteria(method, result){
+    selectOption(varId.Criteria, result.result);
+}
+
+function getDataKeterampilan(method, result){
+    selectOption(varId.Keterampilan, result.result);
+}
+
+function selectPangkat(method, result){
+    selectOption(varId.selectPangkat, result.result);
+}
+function selectJabatan(method, result){
+    selectOption(varId.selectJabatan, result.result);
+}
+
 async function request(method, data, url){
     if (method != "edit") {
         method = method.replace(/[0-9]/g, '');
@@ -28,17 +78,19 @@ async function request(method, data, url){
             try{
                 var result = JSON.parse(response);
                 if (result.code == 200){
-                    if(method == 'pangkat'){
-                        getPangkat(method, result);
-                    }else if(method == 'jabatan'){
-                        getJabatan(method, result);
-                    }else if(method == 'edit'){
+                    if(method == 'edit'){
                         getEdit(method, result);
-                    }else if(method == 'delate'){
+                    } else if(method == 'delate'){
                         getDelate(method, result);
-                    }else if(method == 'getcode'){
-                        
-                    }else{
+                    } else if(method == 'kriteria'){
+                        getDataKriteria(method, result);
+                    } else if(method == 'keterampilan'){
+                        getDataKeterampilan(method, result);
+                    } else if(method == 'pangkat'){
+                        selectPangkat(method, result);
+                    } else if(method == 'jabatan'){
+                        selectJabatan(method, result);
+                    } else {
                         getData(method, result);
                     }
                 }else if (result.code == 500 || result.code == 504 || result.code == 403 || result.code == 201){
@@ -65,6 +117,45 @@ function errorServer(result){
     alert(result.message, 'Please try again', 'error');
 }
 
+function _file(file){
+    if(file != 'null' && file != undefined){
+        window.open('assets/upload/'+file);
+    }else{
+        Swal.fire({
+            title: 'File is Not Found!',
+            text: "Pleace upload file here",
+            icon: 'error',
+            // showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            // cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        })
+    }
+}
+function _approve(url){
+    resetData();
+    data.id = id(event).id;
+    data.bobot = id(event).bobot;
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "Sure for Approve this data?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Approve!'
+    }).then((result) => {
+        if (result.value) {
+            startLoader();
+            Swal.fire(
+                'Approve!',
+                'Your file has been approve.',
+                'success'
+            )
+            request('approve', JSON.stringify(data), url);
+        }
+    })
+}
 function _delete(url){
     resetData();
     data.id = id(event).id;
@@ -98,7 +189,6 @@ function alertDataNone(message, type, target = false) {
         confirmButtonColor: '#3085d6',
     }).then((result) => {
         if (result.value) {
-            console.log(result);
             location.replace(target);
         //     startLoader();
         //     Swal.fire(

@@ -4,6 +4,9 @@ include 'config.php';
 if(!isset($_SESSION['nrp'])){
   header('Location: login.php');
 }
+
+$ses = json_encode($_SESSION);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +31,9 @@ if(!isset($_SESSION['nrp'])){
 
   <link rel="stylesheet" href="./assets/js/sweetalert/sweetalert2.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  <script> 
+    var session = <?= $ses ?>
+  </script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">

@@ -51,21 +51,9 @@ function resetData() {
     // varId.Status.checked = false;
 }
 
-if (JSON.parse(localStorage.getItem('pangkat')) == null) {
-  request('pangkat', JSON.stringify(data), '/ajax/pangkat.php');
-} else {
-  varId.pangkat = JSON.parse(localStorage.getItem('pangkat'));
-}
-
-if (JSON.parse(localStorage.getItem('jabatan')) == null) {
-  request('jabatan', JSON.stringify(data), '/ajax/jabatan.php');
-} else {
-  varId.jabatan = JSON.parse(localStorage.getItem('jabatan'));
-}
-
 varButton.new.onclick = function () {
-  getSelected('Jabatan', varId.selectJabatan, varId.jabatan);
-  getSelected('Pangkat', varId.selectPangkat, varId.pangkat);
+    request('pangkat', JSON.stringify(data), '/ajax/Master.php');
+    request('jabatan', JSON.stringify(data), '/ajax/Master.php');
 }
 
 varButton.cancel.onclick = function () {

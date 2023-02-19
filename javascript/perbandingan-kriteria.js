@@ -6,6 +6,10 @@ varId.nialiCI = document.getElementById('nilaiCI');
 varId.nilaiCR = document.getElementById('nilaiCR');
 varId.resetData = document.getElementById('resetData');
 
+if(session.role == 0){
+    varId.resetData.setAttribute('style', 'display:none');               
+}
+
 var data = {
     id: '',
     dataType : 'data',

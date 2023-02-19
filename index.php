@@ -2,7 +2,6 @@
 $Title = "Dashbodar";
 include "./includes/header.php";
 ?>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -20,6 +19,6 @@ include "./includes/header.php";
   include "./includes/footer.php"  
 ?>
 <script src="./assets/js/plugins/chartjs.min.js"></script>
-  <script>
-    stopLoader();
-  </script>
+<script>
+  stopLoader();
+</script>
