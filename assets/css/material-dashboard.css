@@ -23556,6 +23556,11 @@ hr.horizontal.gray-light {
   width: 100%;
 }
 
+.bg-images1 {
+  background-color: #5e72e4 !important;
+  background-image: url('../img/bg-pricing.jpg');
+}
+
 .navbar-vertical.navbar-expand-xs .navbar-nav>.nav-item {
   margin-top: 0.125rem;
 }
