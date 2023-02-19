@@ -40,6 +40,7 @@ $ses = json_encode($_SESSION);
 <div id="titleLoader" class="pageloader active">
   <div class="spinner"></div>
 </div>
+  <div class="min-height-300 bg-info position-absolute w-100"></div>
 
   <?php include "menu.php" ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
