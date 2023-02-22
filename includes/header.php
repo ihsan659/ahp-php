@@ -67,6 +67,11 @@ $ses = json_encode($_SESSION);
                 </div>
               </a>
             </li>
+            <li class="nav-item d-flex align-items-center">
+              <label class="nav-link text-white font-weight-bold px-3">
+                <span class="d-sm-inline d-none"><?= $_SESSION['nama'] ?></span>
+              </label>
+            </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link p-0 text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="true">
                 <!-- <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i> -->

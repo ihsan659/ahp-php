@@ -25,20 +25,32 @@ class Session {
     }
     private function getLogin(){
         $data = $this->data;
-        $sql = "SELECT * 
-                
+        $sql = "SELECT 
+                    $this->table.nrp, 
+                    $this->table.nama, 
+                    $this->table.password, 
+                    $this->table.pangkat, 
+                    $this->table.jabatan, 
+                    $this->table.tggl_menjabat, 
+                    $this->table.file, 
+                    $this->table.create_at,
+                    jabatan.status
                 FROM 
                     $this->table 
                     LEFT JOIN jabatan ON jabatan.id = $this->table.jabatan
                 WHERE 
                     $this->table.nrp = '". $data->username. "' AND
                     $this->table.password = '". MD5($data->password). "' ";
+        // var_dump($sql);
         $query = $this->conn->query($sql);
         $row =  mysqli_fetch_array($query);
         if($row){
             $_SESSION['nrp'] = $row['nrp'];
             $_SESSION['nama'] = $row['nama'];
             $_SESSION['jabatan'] = $row['jabatan'];
+            $_SESSION['pangkat'] = $row['pangkat'];
+            $_SESSION['tggl_menjabat'] = $row['tggl_menjabat'];
+            $_SESSION['images'] = $row['file'];
             $_SESSION['role'] = $row['status'];
             $result = array(
                 'code' => 200,

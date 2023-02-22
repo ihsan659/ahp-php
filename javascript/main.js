@@ -1,7 +1,7 @@
 var varId={};
+var varSelect={};
 var base_url = window.location.origin;
 varId.loader = document.getElementById('titleLoader');
-console.log(session);
 if(session.role == 0){
     document.getElementById('NavPangkat').style.display = 'none';
     document.getElementById('NavJabatan').style.display = 'none';
@@ -56,10 +56,16 @@ function getDataKeterampilan(method, result){
     selectOption(varId.Keterampilan, result.result);
 }
 
-function selectPangkat(method, result){
-    selectOption(varId.selectPangkat, result.result);
+function getPangkat(method, result){
+    varSelect.Pangkat = result.result;
+    localStorage.setItem('pangkat', JSON.stringify(varSelect.Pangkat));
+    return varSelect.Pangkat;
 }
-function selectJabatan(method, result){
+
+function getJabatan(method, result){
+    varSelect.Jabatan = result.result;
+    localStorage.setItem('jabatan', JSON.stringify(varSelect.Jabatan));
+    return varSelect.Jabatan;
     selectOption(varId.selectJabatan, result.result);
 }
 
@@ -87,9 +93,9 @@ async function request(method, data, url){
                     } else if(method == 'keterampilan'){
                         getDataKeterampilan(method, result);
                     } else if(method == 'pangkat'){
-                        selectPangkat(method, result);
+                        getPangkat(method, result);
                     } else if(method == 'jabatan'){
-                        selectJabatan(method, result);
+                        getJabatan(method, result);
                     } else {
                         getData(method, result);
                     }
@@ -246,9 +252,9 @@ function getPangkat(method, result) {
     return varId.pangkat;
 }
 function getJabatan(method, result) {
-    varId.jabatan = result.result;
-    localStorage.setItem('jabatan', JSON.stringify(varId.jabatan));
-    return varId.jabatan;
+    varId.Jabatan = result.result;
+    localStorage.setItem('jabatan', JSON.stringify(varId.Jabatan));
+    return varId.Jabatan;
 }
 
 function getSelected(name, select, value, selected = null){

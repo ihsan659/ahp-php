@@ -121,8 +121,8 @@ class Tugas {
                                     '".$Date->format('Y-m-d H:i:s')."', 
                                     '$data->criteria',
                                     '$data->keterampilan',
-                                    '$data->description',
-                                    '$data->file',
+                                    '".$data->description."', 
+                                    '".$data->file."',
                                     '$data->bobot',
                                     '$data->status'
                                 )";

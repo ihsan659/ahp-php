@@ -172,33 +172,35 @@ function viewTable(datatable, data, length = 0, table, type, url){
             })
             var tdd = document.createElement('td');  
             // console.log(data[i].status);
-            var aaaaa = document.createElement('a');
-            var iiiii = document.createElement('i');   
-            iiiii.setAttribute('class', 'material-icons text-info text-sm m-2');
-            aaaaa.setAttribute('class', 'align-middle');
-            aaaaa.setAttribute('data-file', data[i].file);
-            aaaaa.setAttribute('data-id', data[i].id);
-            iiiii.setAttribute('data-method', 'file');
-            aaaaa.setAttribute('onclick', '_file("' + data[i].file + '");');
-            iiiii.innerHTML = 'plagiarism'; 
-            aaaaa.appendChild(iiiii);
-            tdd.appendChild(aaaaa);
-
+            
             if(data[i].status == '0'){
-                if(session.role > 0){
-                    var aaaa = document.createElement('a');
-                    var iiii = document.createElement('i');   
-                    iiii.setAttribute('class', 'material-icons text-info text-sm m-2');
-                    aaaa.setAttribute('class', 'align-middle');
-                    aaaa.setAttribute('data-bobot', data[i].bobot);
-                    aaaa.setAttribute('data-id', data[i].id);
-                    iiii.setAttribute('data-method', 'approve');
-                    aaaa.setAttribute('onclick', '_approve("' + varId.url + '");');
-                    iiii.innerHTML = 'assignment_turned_in'; 
-                    aaaa.appendChild(iiii);
-                    tdd.appendChild(aaaa);
-                }
                 if(session.nrp ==  data[i].nrp || session.role > 0){
+                    var aaaaa = document.createElement('a');
+                    var iiiii = document.createElement('i');   
+                    iiiii.setAttribute('class', 'material-icons text-info text-sm m-2');
+                    aaaaa.setAttribute('class', 'align-middle');
+                    aaaaa.setAttribute('data-file', data[i].file);
+                    aaaaa.setAttribute('data-id', data[i].id);
+                    iiiii.setAttribute('data-method', 'file');
+                    aaaaa.setAttribute('onclick', '_file("' + data[i].file + '");');
+                    iiiii.innerHTML = 'plagiarism'; 
+                    aaaaa.appendChild(iiiii);
+                    tdd.appendChild(aaaaa);
+
+                    if(session.role > 0){
+                        var aaaa = document.createElement('a');
+                        var iiii = document.createElement('i');   
+                        iiii.setAttribute('class', 'material-icons text-info text-sm m-2');
+                        aaaa.setAttribute('class', 'align-middle');
+                        aaaa.setAttribute('data-bobot', data[i].bobot);
+                        aaaa.setAttribute('data-id', data[i].id);
+                        iiii.setAttribute('data-method', 'approve');
+                        aaaa.setAttribute('onclick', '_approve("' + varId.url + '");');
+                        iiii.innerHTML = 'assignment_turned_in'; 
+                        aaaa.appendChild(iiii);
+                        tdd.appendChild(aaaa);
+                    }
+                    
                     var aa = document.createElement('a');
                     var ii = document.createElement('i');   
                     ii.setAttribute('class', 'material-icons text-success text-sm m-2');
@@ -235,7 +237,9 @@ function viewTable(datatable, data, length = 0, table, type, url){
         }
         table.tBodies[0].innerHTML = html.innerHTML;
     }
-    datatable.DataTable();
+    datatable.DataTable({
+        order: [[2, 'asc']],
+    });
 }
 
 function tableText(text) {

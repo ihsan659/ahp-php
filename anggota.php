@@ -28,7 +28,7 @@ include "./includes/header.php";
                         <th width="20%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nama</th>
                         <th width="20%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pangkat</th>
                         <th width="20%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jabatan</th>
-                        <th width="10%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Lama Menjabat</th>
+                        <th width="10%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tanggal Menjabat</th>
                         <th width="10%" class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Aksi</th>
                     </tr>
                   </thead>

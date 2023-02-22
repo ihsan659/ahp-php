@@ -29,6 +29,7 @@ const varButton = {
     delete : document.getElementById('btnHapus'),
     cancel : document.getElementById('btnCancel'),
     save : document.getElementById('btnSave'),
+    refresh : document.getElementById('Refresh'),
 }
 
 function resetData() {
@@ -51,9 +52,15 @@ function resetData() {
     // varId.Status.checked = false;
 }
 
-varButton.new.onclick = function () {
+if(localStorage.getItem('pangkat') == null) {
     request('pangkat', JSON.stringify(data), '/ajax/Master.php');
+}else{
+    varSelect.Pangkat =  JSON.parse(localStorage.getItem('pangkat'));
+}
+if(localStorage.getItem('jabatan') == null) {
     request('jabatan', JSON.stringify(data), '/ajax/Master.php');
+}else{
+    varSelect.Jabatan =  JSON.parse(localStorage.getItem('jabatan'));
 }
 
 varButton.cancel.onclick = function () {
@@ -62,6 +69,11 @@ varButton.cancel.onclick = function () {
 
 varButton.save.onclick = function () {
     saveData();
+}
+
+varButton.refresh.onclick = function () {
+    request('pangkat', JSON.stringify(data), '/ajax/Master.php');
+    request('jabatan', JSON.stringify(data), '/ajax/Master.php');
 }
 
 function saveData() {
@@ -103,8 +115,6 @@ function getData(method, _data){
 function getEdit(method, _data){
     if(method == 'edit'){
         var __data = _data.result[0];
-        getSelected('Jabatan', varId.selectJabatan, varId.jabatan);
-        getSelected('Pangkat', varId.selectPangkat, varId.pangkat);
         data.id = __data.id;
         varId.Nrp.value = __data.nrp;
         varId.Nama.value = __data.nama;
@@ -113,6 +123,10 @@ function getEdit(method, _data){
         varId.Menjabat.value = __data.tggl_menjabat;
     }
 }
+
+selectOption(varId.selectPangkat, varSelect.Pangkat);
+selectOption(varId.selectJabatan, varSelect.Jabatan);
+
 
 function viewTable(datatable, data, length = 0, table, type, url){
     var html = document.createElement('tbody');
