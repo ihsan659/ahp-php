@@ -21,8 +21,7 @@ include "./includes/header.php";
             </div>
         </div>
     </div>
-    <div id="container-Kriteria">
-        
+    <div id="container-Kriteria"> 
     </div>
     <!-- <div class="row mt-3">
         <div class="col-lg-12 mb-lg-0 mb-4">

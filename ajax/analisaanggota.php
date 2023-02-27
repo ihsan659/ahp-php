@@ -102,13 +102,27 @@ class AnalisisAnggota {
         }
 
         // Transformasi matriks
+        $anggota = array_keys($rows);
         foreach ($row as $key => $value) {
-            for ($a=0; $a < count($value); $a++) { 
-                for ($b=0; $b < count($value); $b++) { 
-                    $matrix[$key][$a][] = $value[$b][$a];
+            $no = 0;
+            for ($a=0; $a < count($value); $a++) {
+                if($a == 0){
+                    for ($c=0; $c < count($anggota); $c++) { 
+                        if($c == 0){
+                            $matrix[$key][$no][] = $key;
+                        }
+                        $matrix[$key][$no][] = $anggota[$c];
+                    }
+                    $no++;
                 }
+                for ($b=0; $b < count($value); $b++) { 
+                    $matrix[$key][$no][] = $value[$b][$a];
+                }
+                array_unshift($matrix[$key][$no], $anggota[$a]);
+                $no++;
             }
-        }        
+        }
+
         return $matrix;
 
     }

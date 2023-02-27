@@ -83,6 +83,7 @@ function createTable(data, key, rowDiv){
         var tr = document.createElement('tr');
         for (let b = 0; b < data[a].length; b++) {
             var td = document.createElement('td');
+            td.setAttribute('class', 'w-10 text-center');
             td = formatTable(data[a][b], td);
             tr.appendChild(td);
         }
@@ -99,11 +100,11 @@ function createTable(data, key, rowDiv){
 function formatTable(data, td){
     var div = document.createElement('div');
     var p = document.createElement('p');
-
-    // div.classList = 'text-le';
     p.classList = 'text-sm font-weight-bold mb-0';
+    if((typeof data) == 'number' && (data - Math.floor(data)) !== 0){
+        data = data.toFixed(3);
+    }
     p.innerHTML = formatNumber(data);
-
     div.appendChild(p);
     td.appendChild(div);
 
