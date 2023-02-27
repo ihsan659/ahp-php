@@ -20,6 +20,18 @@ setTimeout(() => {
     stopLoader();
 }, 2000);
 
+
+function formatNumber(number) {
+    var result = '';
+    var check = number === Math.floor(number) 
+    if(check === true){
+        result = number;
+    }else{
+        result = number;
+    }
+    return result;
+}
+
 function getDate() {
     var today = new Date();
     var dd = today.getDate();
@@ -69,7 +81,7 @@ function getJabatan(method, result){
     selectOption(varId.selectJabatan, result.result);
 }
 
-async function request(method, data, url){
+async function request(method, data, session, url){
     if (method != "edit") {
         method = method.replace(/[0-9]/g, '');
     }
@@ -78,6 +90,7 @@ async function request(method, data, url){
         type: 'post',
         data : {
             reason: method,
+            session: session,
             data: data
         },
         success : function(response){
@@ -116,7 +129,7 @@ async function request(method, data, url){
 function _edit(url) {
     data.id = id(event).id;
     data.method = 'edit';
-    request(data.method, JSON.stringify(data), url);
+    request(data.method, JSON.stringify(data), JSON.stringify(session), url);
 }
 
 function errorServer(result){
@@ -158,7 +171,7 @@ function _approve(url){
                 'Your file has been approve.',
                 'success'
             )
-            request('approve', JSON.stringify(data), url);
+            request('approve', JSON.stringify(data), JSON.stringify(session), url);
         }
     })
 }
@@ -181,7 +194,7 @@ function _delete(url){
                 'Your file has been deleted.',
                 'success'
             )
-            request('delete', JSON.stringify(data), url);
+            request('delete', JSON.stringify(data), JSON.stringify(session), url);
         }
     })
 }
@@ -221,12 +234,12 @@ function refresh(response = null, table, datatable, type = null, url) {
     stopLoader();
 }
 function cancelRefresh() {
-    request('data', JSON.stringify(data), varId.url);
+    request('data', JSON.stringify(data), JSON.stringify(session), varId.url);
 }
 function getViewData(doc, url){
-    data.method = doc;
     resetData();
-    request(data.method, JSON.stringify(data), url);
+    data.method = doc == 'method' ? 'data' : doc;
+    request(data.method, JSON.stringify(data), JSON.stringify(session), url);
 }
 
 function formatDate(date){

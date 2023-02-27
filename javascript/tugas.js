@@ -34,8 +34,8 @@ if(session.role > 0){
     varButton.new.setAttribute('style', 'display: none;');
 }
 
-request('kriteria', JSON.stringify(data), '/ajax/Master.php');
-request('keterampilan', JSON.stringify(data), '/ajax/Master.php');
+request('kriteria', JSON.stringify(data), JSON.stringify(session), '/ajax/Master.php');
+request('keterampilan', JSON.stringify(data), JSON.stringify(session), '/ajax/Master.php');
 
 varButton.new.onclick = function () {
     varId.Date.value = today;
@@ -115,7 +115,7 @@ function saveData() {
         data.description = varId.Description.value;
         data.file = JSON.parse(localStorage.getItem('file')) != null ? JSON.parse(localStorage.getItem('file')) : data.file;
         data.bobot = varId.Bobot.value;
-        result = request(method, JSON.stringify(data), varId.url).then( async (result) => {
+        result = request(method, JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
             if (JSON.parse(result).code == 200){
                 localStorage.removeItem('file');
                 resetData();

@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item" id="NavDashboard">
-          <a class="nav-link text-dark <?= $Title == 'Dashbodar' ? 'active bg-gradient-info' : '' ?>" href="/">
+          <a class="nav-link  <?= $Title == 'Dashbodar' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="/">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -21,20 +21,28 @@
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Modul</h6>
         </li>
-        <li class="nav-item" id="NavPerbandingan">
-          <a class="nav-link text-dark <?= $Title == 'Perbandingan' ? 'active bg-gradient-info' : '' ?>" href="./Perbandingan.php">
-            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">key</i>
-            </div>
-            <span class="nav-link-text ms-1">Perbandingan</span>
-          </a>
-        </li>
         <li class="nav-item" id="NavTugas">
-          <a class="nav-link text-dark <?= $Title == 'Tugas' ? 'active bg-gradient-info' : '' ?>" href="./Tugas.php">
+          <a class="nav-link <?= $Title == 'Tugas' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./Tugas.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">integration_instructions</i>
             </div>
             <span class="nav-link-text ms-1">Tugas</span>
+          </a>
+        </li>
+        <li class="nav-item" id="NavPerbandingan">
+          <a class="nav-link <?= $Title == 'Perbandingan' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./Perbandingan.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">key</i>
+            </div>
+            <span class="nav-link-text ms-1">Analisa Kriteria</span>
+          </a>
+        </li>
+        <li class="nav-item" id="NavAnalisaAnggota">
+          <a class="nav-link <?= $Title == 'Analisa Anggota' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./AnalisaAnggota.php">
+            <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">insights</i>
+            </div>
+            <span class="nav-link-text ms-1">Analisa Anggota</span>
           </a>
         </li>
         
@@ -42,7 +50,7 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-8">Tools</h6>
         </li>
         <li class="nav-item" id="NavKriteria">
-          <a class="nav-link text-dark <?= $Title == 'Kriteria' ? 'active bg-gradient-info' : '' ?>" href="./kriteria.php">
+          <a class="nav-link <?= $Title == 'Kriteria' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./kriteria.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">diamond</i>
             </div>
@@ -50,7 +58,7 @@
           </a>
         </li>
         <li class="nav-item" id="NavAlternatif">
-          <a class="nav-link text-dark <?= $Title == 'Alternatif' ? 'active bg-gradient-info' : '' ?>" href="./alternatif.php">
+          <a class="nav-link <?= $Title == 'Alternatif' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./alternatif.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">travel_explore</i>
             </div>
@@ -58,7 +66,7 @@
           </a>
         </li>
         <li class="nav-item" id="NavKeterampilan">
-          <a class="nav-link text-dark <?= $Title == 'Keterampilan' ? 'active bg-gradient-info' : '' ?>" href="./Keterampilan.php">
+          <a class="nav-link <?= $Title == 'Keterampilan' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./Keterampilan.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">lan</i>
             </div>
@@ -66,7 +74,7 @@
           </a>
         </li>
         <li class="nav-item" id="NavPangkat">
-          <a class="nav-link text-dark <?= $Title == 'Pangkat' ? 'active bg-gradient-info' : '' ?>" href="./pangkat.php">
+          <a class="nav-link <?= $Title == 'Pangkat' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./pangkat.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">assignment</i>
             </div>
@@ -74,7 +82,7 @@
           </a>
         </li>
         <li class="nav-item" id="NavJabatan">
-          <a class="nav-link text-dark <?= $Title == 'Jabatan' ? 'active bg-gradient-info' : '' ?>" href="./jabatan.php">
+          <a class="nav-link <?= $Title == 'Jabatan' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./jabatan.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">weekend</i>
             </div>
@@ -82,7 +90,7 @@
           </a>
         </li>
         <li class="nav-item" id="NavAnggota">
-          <a class="nav-link text-dark <?= $Title == 'Anggota' ? 'active bg-gradient-info' : '' ?>" href="./anggota.php">
+          <a class="nav-link <?= $Title == 'Anggota' ? 'active bg-gradient-info text-light' : 'text-dark' ?>" href="./anggota.php">
             <div class="text-dark text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>

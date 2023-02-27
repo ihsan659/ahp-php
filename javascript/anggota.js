@@ -53,12 +53,12 @@ function resetData() {
 }
 
 if(localStorage.getItem('pangkat') == null) {
-    request('pangkat', JSON.stringify(data), '/ajax/Master.php');
+    request('pangkat', JSON.stringify(data), JSON.stringify(session), '/ajax/Master.php');
 }else{
     varSelect.Pangkat =  JSON.parse(localStorage.getItem('pangkat'));
 }
 if(localStorage.getItem('jabatan') == null) {
-    request('jabatan', JSON.stringify(data), '/ajax/Master.php');
+    request('jabatan', JSON.stringify(data), JSON.stringify(session), '/ajax/Master.php');
 }else{
     varSelect.Jabatan =  JSON.parse(localStorage.getItem('jabatan'));
 }
@@ -72,8 +72,8 @@ varButton.save.onclick = function () {
 }
 
 varButton.refresh.onclick = function () {
-    request('pangkat', JSON.stringify(data), '/ajax/Master.php');
-    request('jabatan', JSON.stringify(data), '/ajax/Master.php');
+    request('pangkat', JSON.stringify(data), JSON.stringify(session), '/ajax/Master.php');
+    request('jabatan', JSON.stringify(data), JSON.stringify(session), '/ajax/Master.php');
 }
 
 function saveData() {
@@ -86,7 +86,7 @@ function saveData() {
         data.selectPangkat = varId.selectPangkat.value;
         data.menjabat = varId.Menjabat.value;
         data.password = varId.Password.value;
-        result = request(method, JSON.stringify(data), varId.url).then( async (result) => {
+        result = request(method, JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
             if (JSON.parse(result).code == 200){
                 resetData();
                 return true

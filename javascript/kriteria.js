@@ -44,7 +44,7 @@ varButton.save.onclick = function () {
     saveData();
 }
 varButton.new.onclick = function () {
-    request('getcode', JSON.stringify(data), varId.url).then( async (result) => {
+    request('getcode', JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
         if (JSON.parse(result).code == 200){
             varId.Code.value = JSON.parse(result).result;
             varId.Code.disabled = true;
@@ -83,7 +83,7 @@ function saveData() {
         data.description = varId.Description.value;
         data.bobot = varId.Bobot.value;
         data.code = varId.Code.value;
-        result = request(method, JSON.stringify(data), varId.url).then( async (result) => {
+        result = request(method, JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
             if (JSON.parse(result).code == 200){
                 resetData();
                 return true

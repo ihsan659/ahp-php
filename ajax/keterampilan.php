@@ -6,7 +6,7 @@ class Pangkat {
     private $conn = "";
     private $table;
 
-    public function __construct($reason, $data) {
+    public function __construct($reason, $session, $data) {
         $db = new koneksi();
         $this->conn = $db->getConnection();
         $this->data = $data;
@@ -132,4 +132,4 @@ class Pangkat {
     
 } 
 
-new Pangkat($_POST['reason'], json_decode($_POST['data']));
+new Pangkat($_POST['reason'], json_decode($_POST['session']), json_decode($_POST['data']));

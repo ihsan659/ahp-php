@@ -47,7 +47,7 @@ function saveData() {
         data.nama = varId.Nama.value;
         data.description = varId.Description.value;
         data.status = varId.Status.checked == true ? 1 : 0;
-        result = request(method, JSON.stringify(data), varId.url).then( async (result) => {
+        result = request(method, JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
             if (JSON.parse(result).code == 200){
                 resetData();
                 return true

@@ -33,7 +33,7 @@ varId.resetData.onclick = function(){
     }).then((result) => {
         if (result.value) {
             startLoader();
-            request('reset', JSON.stringify(data), varId.url).then( async (result) => {
+            request('reset', JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
                 if (JSON.parse(result).code == 200){
                     location.reload();
                 }else{

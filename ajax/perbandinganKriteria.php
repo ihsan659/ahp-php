@@ -6,7 +6,7 @@ class Perbandingan {
     private $conn = "";
     private $table;
 
-    public function __construct($reason, $data) {
+    public function __construct($reason, $session, $data) {
         $db = new koneksi();
         $this->conn = $db->getConnection();
         $this->data = $data;
@@ -158,4 +158,4 @@ class Perbandingan {
     
 } 
 
-new Perbandingan($_POST['reason'], json_decode($_POST['data']));
+new Perbandingan($_POST['reason'], json_decode($_POST['session']), json_decode($_POST['data']));

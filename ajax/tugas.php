@@ -6,7 +6,7 @@ class Tugas {
     private $conn = "";
     private $table;
 
-    public function __construct($reason, $data) {
+    public function __construct($reason, $session, $data) {
         $db = new koneksi();
         $this->conn = $db->getConnection();
         $this->data = $data;
@@ -193,4 +193,4 @@ class Tugas {
     
 } 
 
-new Tugas($_POST['reason'], json_decode($_POST['data']));
+new Tugas($_POST['reason'], json_decode($_POST['session']), json_decode($_POST['data']));

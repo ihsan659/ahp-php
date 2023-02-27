@@ -50,7 +50,7 @@ function saveData() {
         }
         data.description = varId.Description.value;
         data.kepentingan = varId.Kepentingan.value;
-        result = request(method, JSON.stringify(data), varId.url).then( async (result) => {
+        result = request(method, JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
             if (JSON.parse(result).code == 200){
                 resetData();
                 return true
