@@ -65,7 +65,7 @@ varButton.generate.onclick = function() {
         confirmButtonText: 'Yes, Generate!'
     }).then((result) => {
         if (result.value) {
-            request('genareate', JSON.stringify(data), varId.url).then( async (result) => {
+            request('genareate', JSON.stringify(data), JSON.stringify(session), varId.url).then( async (result) => {
                 if (JSON.parse(result).code == 200){
                     varButton.generate.style.display = 'none';
                     location.replace("Perbandingan.php");

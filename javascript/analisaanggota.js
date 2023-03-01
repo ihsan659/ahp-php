@@ -15,13 +15,20 @@ function resetData() {
 getViewData(data.dataType, varId.url);
 
 function getData(method, _data){
-    viewTables(_data);
-    stopLoader();
+    if(_data.result != null){
+        viewTables(_data);
+        stopLoader();
+    }else{
+        stopLoader();
+        alertDataNone('Please generate criteria data', 'warning', 'kriteria.php');
+    }
 }
 
 function viewTables(data){
     viewtableAnggota(varId.tableAnggota,data);
     viewTablesAlternatif('container-Kriteria',data);
+
+    viewTableNilai('tableRingingNilai', data);
 }
 
 function viewtableAnggota(tables, _data){
@@ -63,9 +70,29 @@ function viewTablesAlternatif(divId, data){
         var rowDiv = document.createElement('div');
         rowDiv = createTable(_data[key], key, rowDiv);
         html.appendChild(rowDiv);
-
+        
     })
     conten.innerHTML = html.innerHTML;
+}
+function viewTableNilai(tableId, data){
+    var _data = data.nilai;
+    var table = document.getElementById(tableId);
+    var html = document.createElement('tbody');
+    Object.keys(_data).forEach(function (key){
+        let tr = document.createElement('tr');
+        for(i = 0; i < 2; i++){
+            let td = document.createElement('td');
+            if(i == 0){
+                td = formatTable(key, td)
+                tr.appendChild(td);
+            }else{
+                td = formatTable(_data[key], td)
+                tr.appendChild(td);
+            }
+        }
+        html.appendChild(tr)
+    })
+    table.tBodies[0].innerHTML = html.innerHTML;
 }
 
 function createTable(data, key, rowDiv){

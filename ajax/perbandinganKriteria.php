@@ -104,7 +104,11 @@ class Perbandingan {
 
     private function resetData(){
         $sql = "DELETE FROM analisa_kriteria";
+        $sql1 = "DELETE FROM eigenciteria";
+        $sql2 = "DELETE FROM eigentotal";
         $query = $this->conn->query($sql);
+        $query = $this->conn->query($sql1);
+        $query = $this->conn->query($sql2);
         if ($query) {
             return $this->getData();
         }else{

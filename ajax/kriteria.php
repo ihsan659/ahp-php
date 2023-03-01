@@ -201,14 +201,13 @@ class Kriteria {
 
             }
         }
-        $check = $this->saveCriteria($matrix, $kriteria, $nilai);
-        if($check){
-            $send = array(
-                'code' => 200,
-                'message' => 'success'
-            );
-            echo json_encode($send);
-        }
+        $this->saveCriteria($matrix, $kriteria, $nilai);
+        $this->saveEigen($matrix, $kriteria);
+        $send = array(
+            'code' => 200,
+            'message' => 'success'
+        );
+        echo json_encode($send);
     }
 
     private function saveCriteria ($matrix, $kriteria, $nilai){
@@ -231,6 +230,38 @@ class Kriteria {
             }
         }
         return $query;
+    }
+
+    private function saveEigen($matrix, $kriteria){
+        for($a = 0; $a < count($matrix); $a++){
+            for($b = 0; $b < count($matrix); $b++){
+                $nilai[$a][] = $matrix[$b][$a];
+            }
+            $jumlah[] = array_sum($nilai[$a]); 
+        }
+
+        // Generet Eigen
+        for($a = 0; $a < count($matrix); $a++){
+            for($b = 0; $b < count($matrix); $b++){
+                $sql = "INSERT INTO eigenciteria(
+                                pertama, 
+                                nilai, 
+                                kedua
+                            ) VALUES(
+                                '".$kriteria[$a]['code']."',
+                                '".$matrix[$a][$b]/$jumlah[$b]."', 
+                                '".$kriteria[$b]['code']."'
+                            )";
+                $query = $this->conn->query($sql);
+                $Eigen[$a][] = $matrix[$a][$b]/$jumlah[$b];
+            }
+            $jumlEigen[] = array_sum($Eigen[$a])/count($kriteria);
+            $sql = "INSERT INTO eigentotal (criteria, nilai)
+                        VALUES(
+                            '".$kriteria[$a]['code']."',
+                            '".$jumlEigen[$a]."' )";
+            $this->conn->query($sql);
+        }
     }
 
     private function getKriteria (){

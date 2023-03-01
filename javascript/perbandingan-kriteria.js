@@ -47,7 +47,7 @@ varId.resetData.onclick = function(){
 getViewData(data.dataType, varId.url);
 
 function getData(method, __data){
-    _data = __data.result;
+    _data = __data.result;;
     var table = varId.table;
     var thead = document.createElement('thead');
     var html = document.createElement('tbody');

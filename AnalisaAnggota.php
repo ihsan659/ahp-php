@@ -23,6 +23,34 @@ include "./includes/header.php";
     </div>
     <div id="container-Kriteria"> 
     </div>
+    <div class="row mt-3">
+        <div class="col-lg-12 mb-lg-0 mb-4">
+            <div class="card p-3">
+                <div class="card-header pb-0 p-3">
+                    <div class="d-flex justify-content">
+                        <h6 class="mb-2">Table Ringking</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-lg-4 mb-lg-0 mb-4">
+            <div class="card p-3">
+                <div class="table-responsive">
+                    <table id="tableRingingNilai" class="table align-items-center">
+                        <thead>
+                            <tr>
+                                <th>NRP</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- <div class="row mt-3">
         <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card p-3">
