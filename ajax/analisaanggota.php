@@ -55,7 +55,10 @@ class AnalisisAnggota {
             $result = $res;
             $matrix = $this->generateMatrix($kriteria, $result);
             $matrixE = $matrix;
-            $NilaiEigen = $this->generateNilaiEigen($matrix, count($kriteria));
+            foreach($result as $k => $v){
+                $anggota[] = $k;
+            }
+            $NilaiEigen = $this->generateNilaiEigen($matrix, count($kriteria), $anggota);
             foreach($matrix as $key => $value){
                 for($a = 0; $a < count($value); $a++){
                     if($a != count($value)-1){
@@ -66,15 +69,18 @@ class AnalisisAnggota {
                             array_push($matrix[$key][$a], $NilaiEigen[$key][$a][$b]);
                         }
                     }
-    
+                    
                 }
             }
 
+
+            
             foreach($NilaiEigen as $code => $val){
                 for($i = 0; $i < count($val); $i++){
                     if($i != 0){
                         for ($j=0; $j < count($val[$i]); $j++) { 
                             if($j == count($val[$i])-1){
+                                // $index[$i][$j][] = (float)$Eigin[$code][0] .' * '. $val[$i][count($val[$i])-1] ' = ' (float)$Eigin[$code][0] * $val[$i][count($val[$i])-1];
                                 $index[$i][$j][] = (float)$Eigin[$code][0] * $val[$i][count($val[$i])-1];
                             }
                         }
@@ -82,18 +88,11 @@ class AnalisisAnggota {
                 }
             }
 
-            foreach($result as $k => $v){
-                $anggota[] = $k;
-            }
-
             $ix =0;
-            for ($n=1; $n <=count($index) ; $n++) { 
-                // $nilai[$n]['nrp'] = ;
-                $nilai[$anggota[$ix]][] = array_sum($index[$n][6]);
+            for ($n=1; $n <= count($index) ; $n++) { 
+                $nilai[$anggota[$ix]][] = array_sum($index[$n][count($index)+1]);
                 $ix++;
-                // krsort($nilai[$n]);
             }
-            // asort($nilai);
 
             
             $send = array(
@@ -181,7 +180,7 @@ class AnalisisAnggota {
 
     }
 
-    private function generateNilaiEigen($matrix, $index){
+    private function generateNilaiEigen($matrix, $index, $anggota){
         $jumlah = [];
         $nilai = [];
         $indeksRandom = array(0,0,0.58,0.90,1.12,1.24,1.32,1.41,1.45,1.49,1.51,1.48,1.56,1.57,1.59);
@@ -208,16 +207,17 @@ class AnalisisAnggota {
         }
 
         // Menghitung Jumlah dengan Total
-        for ($a = 1; $a <= $index+2; $a++) {
-            if($a <= $index){
+        // var_dump();
+        for ($a = 1; $a <= count($anggota)+2; $a++) {
+            if($a <= count($anggota)){
                 if($a == 1){
                     $header[] = 'Nilai Eigen';
                 }else{
                     $header[] = '';
                 }
-            }else if($a == $index+1){
+            }else if($a == count($anggota)+1){
                 $header[] = 'Jumlah';
-            }else if($a ==$index+2){
+            }else if($a ==count($anggota)+2){
                 $header[] = 'Rata-rata';
             }else{
                 $header[] = '';
